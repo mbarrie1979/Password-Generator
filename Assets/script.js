@@ -7,6 +7,7 @@ var regexpCheckIfNumbers = /^\d+$/;
 
 var lengthCheck = false;
 var lettersCheck = false;
+var numbersCheck = false;
 
 var passcodeRequirements = {
   passwordLength: 8,
@@ -16,6 +17,7 @@ var passcodeRequirements = {
 }
 
 
+// User Enters in Desired length of password 8-12 characters
 while (!lengthCheck) {
   var userPromptLength = prompt("Enter the desired password length (from 8 - 12 characters)");
 
@@ -37,6 +39,7 @@ while (!lengthCheck) {
   }
 };
 
+// User enters in whether they want letters included in the password (Y or N)
 while (!lettersCheck) {
   var userLetters = prompt("Would you like to include letters? (Y or N)");
   if (!userLetters) {
@@ -56,6 +59,30 @@ while (!lettersCheck) {
     } else {
       alert("Please enter Y or N")
       lettersCheck = false;
+    }
+  }
+}
+
+// User enters in whether they want numbers included in the password (Y or N)
+while (!numbersCheck) {
+  var userNumbers = prompt("Would you like to include numbers? (Y or N)");
+  if (!userNumbers) {
+    alert("User cancelled, default of YES will be used");
+    passcodeRequirements.includeNumbers = true;
+    console.log(passcodeRequirements)
+    numbersCheck = true;
+  } else {
+    if (userNumbers.trim()[0].toUpperCase() === "Y") {
+      passcodeRequirements.includeNumbers = true;
+      console.log(passcodeRequirements)
+      numbersCheck = true;
+    } else if (userNumbers.trim()[0].toUpperCase() === "N") {
+      passcodeRequirements.includeNumbers = false;
+      console.log(passcodeRequirements)
+      numbersCheck = true;
+    } else {
+      alert("Please enter Y or N")
+      numbersCheck = false;
     }
   }
 }
