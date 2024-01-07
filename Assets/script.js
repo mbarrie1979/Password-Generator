@@ -8,6 +8,7 @@ var regexpCheckIfNumbers = /^\d+$/;
 var lengthCheck = false;
 var lettersCheck = false;
 var numbersCheck = false;
+var specialCheck = false;
 
 var passcodeRequirements = {
   passwordLength: 8,
@@ -47,6 +48,7 @@ while (!lettersCheck) {
     passcodeRequirements.includeLetters = true;
     console.log(passcodeRequirements)
     lettersCheck = true;
+    break;
   } else {
     if (userLetters.trim()[0].toUpperCase() === "Y") {
       passcodeRequirements.includeLetters = true;
@@ -71,6 +73,7 @@ while (!numbersCheck) {
     passcodeRequirements.includeNumbers = true;
     console.log(passcodeRequirements)
     numbersCheck = true;
+    break;
   } else {
     if (userNumbers.trim()[0].toUpperCase() === "Y") {
       passcodeRequirements.includeNumbers = true;
@@ -83,6 +86,32 @@ while (!numbersCheck) {
     } else {
       alert("Please enter Y or N")
       numbersCheck = false;
+    }
+  }
+}
+
+// User enters in whether they want special characters included in the password (Y or N)
+while (!numbersCheck) {
+while (!specialCheck) {
+  var userSpecial = prompt("Would you like to include special characters? (Y or N)");
+  if (!userSpecial) {
+    alert("User cancelled, default of YES will be used");
+    passcodeRequirements.includeSpecial = true;
+    console.log(passcodeRequirements)
+    specialCheck = true;
+    break;
+  } else {
+    if (userSpecial.trim()[0].toUpperCase() === "Y") {
+      passcodeRequirements.includeSpecial = true;
+      console.log(passcodeRequirements)
+      specialCheck = true;
+    } else if (userSpecial.trim()[0].toUpperCase() === "N") {
+      passcodeRequirements.includeSpecial = false;
+      console.log(passcodeRequirements)
+      specialCheck = true;
+    } else {
+      alert("Please enter Y or N")
+     specialCheck = false;
     }
   }
 }
