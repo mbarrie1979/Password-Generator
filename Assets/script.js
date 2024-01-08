@@ -16,7 +16,6 @@ var passcodeRequirements = {
   includeLetters: false,
   includeNumbers: false,
   includeSpecial: false,
-  numberOfArrays: 0
 }
 
 
@@ -51,14 +50,12 @@ while (!lettersCheck) {
   if (!userLetters) {
     alert("User cancelled, default of YES will be used");
     passcodeRequirements.includeLetters = true;
-    passcodeRequirements.numberOfArrays += 1;
     console.log(passcodeRequirements)
     lettersCheck = true;
     break;
   } else {
     if (userLetters.trim()[0].toUpperCase() === "Y") {
       passcodeRequirements.includeLetters = true;
-      passcodeRequirements.numberOfArrays += 1;
       console.log(passcodeRequirements)
       lettersCheck = true;
     } else if (userLetters.trim()[0].toUpperCase() === "N") {
@@ -78,14 +75,12 @@ while (!numbersCheck) {
   if (!userNumbers) {
     alert("User cancelled, default of YES will be used");
     passcodeRequirements.includeNumbers = true;
-    passcodeRequirements.numberOfArrays += 1;
     console.log(passcodeRequirements)
     numbersCheck = true;
     break;
   } else {
     if (userNumbers.trim()[0].toUpperCase() === "Y") {
       passcodeRequirements.includeNumbers = true;
-      passcodeRequirements.numberOfArrays += 1;
       console.log(passcodeRequirements);
       numbersCheck = true;
     } else if (userNumbers.trim()[0].toUpperCase() === "N") {
@@ -105,14 +100,12 @@ while (!specialCheck) {
   if (!userSpecial) {
     alert("User cancelled, default of YES will be used");
     passcodeRequirements.includeSpecial = true;
-    passcodeRequirements.numberOfArrays += 1;
     console.log(passcodeRequirements);
     specialCheck = true;
     break;
   } else {
     if (userSpecial.trim()[0].toUpperCase() === "Y") {
       passcodeRequirements.includeSpecial = true;
-      passcodeRequirements.numberOfArrays += 1;
       console.log(passcodeRequirements)
       specialCheck = true;
     } else if (userSpecial.trim()[0].toUpperCase() === "N") {
@@ -129,7 +122,7 @@ while (!specialCheck) {
 
 var lowerCaseLetters = [...Array(26)].map((_, i) => String.fromCharCode(i + 97));
 var upperCaseLetters = lowerCaseLetters.map(letter => letter.toUpperCase());
-var allLetters = [lowerCaseLetters, upperCaseLetters];
+// var allLettersArray = [lowerCaseLetters, upperCaseLetters];
 var numberArray = [...Array(10)].map((_, i) => i);
 var specialCharacters = [...Array(26)].map((_, i) => String.fromCharCode(i + 33));
 
@@ -147,13 +140,13 @@ var randomChoose = (arr) => {
   return arr[h]; // Return the element at the randomly chosen index
 };
 
-var runRandomChooseMultipleTimes = (arr, times) => {
-  var results = [];
-  for (var i = 0; i < times; i++) {
-    results.push(randomChoose(arr));
-  }
-  return results;
-};
+// var runRandomChooseMultipleTimes = (arr, times) => {
+//   var results = [];
+//   for (var i = 0; i < times; i++) {
+//     results.push(randomChoose(arr));
+//   }
+//   return results;
+// };
 
 
 
@@ -168,6 +161,28 @@ function writePassword() {
   passwordText.value = password;
 
 }
+function generatePassword() {
+  var combinedCharacters = [];
+  if (passcodeRequirements.includeLetters) {
+    combinedCharacters = combinedCharacters.concat(lowerCaseLetters, upperCaseLetters);
+  }
+  if (passcodeRequirements.includeNumbers) {
+    combinedCharacters = combinedCharacters.concat(numberArray);
+  }
+  if (passcodeRequirements.includeSpecial) {
+    combinedCharacters = combinedCharacters.concat(specialCharacters);
+  }
+
+  var finalPassword = '';
+  for (var i = 0; i < passcodeRequirements.passwordLength; i++) {
+    finalPassword += randomChoose(combinedCharacters);
+  }
+
+  return finalPassword;
+}
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
