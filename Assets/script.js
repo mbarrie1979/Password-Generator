@@ -18,6 +18,35 @@ var passcodeRequirements = {
 }
 
 
+
+
+var lowerCaseLetters = [...Array(26)].map((_, i) => String.fromCharCode(i + 97));
+var upperCaseLetters = lowerCaseLetters.map(letter => letter.toUpperCase());
+var numberArray = [...Array(10)].map((_, i) => i);
+var specialCharacters = [...Array(26)].map((_, i) => String.fromCharCode(i + 33));
+
+
+var shuffle = (input) => {
+  for (var i = input.length - 1; i > 0; i--); {
+    var j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j] = array[j], array[i]];
+  }
+  return input;
+}
+
+var randomChoose = (arr) => {
+  var h = Math.floor(Math.random() * arr.length);
+  return arr[h]; // Return the element at the randomly chosen index
+};
+
+var runRandomChooseMultipleTimes = (arr, times) => {
+  var results = [];
+  for (var i = 0; i < times; i++) {
+    results.push(randomChoose(arr));
+  }
+  return results;
+};
+
 // User Enters in Desired length of password 8-12 characters
 while (!lengthCheck) {
   var userPromptLength = prompt("Enter the desired password length (from 8 - 12 characters)");
@@ -91,7 +120,6 @@ while (!numbersCheck) {
 }
 
 // User enters in whether they want special characters included in the password (Y or N)
-while (!numbersCheck) {
 while (!specialCheck) {
   var userSpecial = prompt("Would you like to include special characters? (Y or N)");
   if (!userSpecial) {
@@ -111,7 +139,7 @@ while (!specialCheck) {
       specialCheck = true;
     } else {
       alert("Please enter Y or N")
-     specialCheck = false;
+      specialCheck = false;
     }
   }
 }
