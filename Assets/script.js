@@ -9,8 +9,8 @@ var lengthCheck = false;
 var lettersCheck = false;
 var numbersCheck = false;
 var specialCheck = false;
-// var numberOfArrays = 0;
 
+// object storing user selections
 var passcodeRequirements = {
   passwordLength: 8,
   includeLetters: false,
@@ -55,20 +55,22 @@ function passCodeQuestions() {
       lettersCheck = true;
       break;
     } else {
-      if (userLetters.trim()[0].toUpperCase() === "Y") {
-        passcodeRequirements.includeLetters = true;
-        console.log(passcodeRequirements)
-        lettersCheck = true;
-      } else if (userLetters.trim()[0].toUpperCase() === "N") {
-        passcodeRequirements.includeLetters = false;
-        console.log(passcodeRequirements)
-        lettersCheck = true;
+      if (userLetters.length === 1 && (userLetters.trim()[0].toUpperCase() === "Y" || userLetters.trim()[0].toUpperCase() === "N")) {
+        if (userLetters.trim()[0].toUpperCase() === "Y") {
+          passcodeRequirements.includeLetters = true;
+          console.log(passcodeRequirements)
+          lettersCheck = true;
+        } else if (userLetters.trim()[0].toUpperCase() === "N") {
+          passcodeRequirements.includeLetters = false;
+          console.log(passcodeRequirements)
+          lettersCheck = true;
+        }
       } else {
-        alert("Please enter Y or N")
+        alert("Please enter a single letter: Y or N")
         lettersCheck = false;
       }
     }
-  }
+  };
 
   // User enters in whether they want numbers included in the password (Y or N)
   while (!numbersCheck) {
@@ -80,21 +82,22 @@ function passCodeQuestions() {
       numbersCheck = true;
       break;
     } else {
-      if (userNumbers.trim()[0].toUpperCase() === "Y") {
-        passcodeRequirements.includeNumbers = true;
-        console.log(passcodeRequirements);
-        numbersCheck = true;
-      } else if (userNumbers.trim()[0].toUpperCase() === "N") {
-        passcodeRequirements.includeNumbers = false;
-        console.log(passcodeRequirements)
-        numbersCheck = true;
+      if (userNumbers.length === 1 && (userNumbers.trim()[0].toUpperCase() === "Y" || userNumbers.trim()[0].toUpperCase() === "N")) {
+        if (userNumbers.trim()[0].toUpperCase() === "Y") {
+          passcodeRequirements.includeNumbers = true;
+          console.log(passcodeRequirements)
+          numbersCheck = true;
+        } else if (userNumbers.trim()[0].toUpperCase() === "N") {
+          passcodeRequirements.includeNumbers = false;
+          console.log(passcodeRequirements)
+          numbersCheck = true;
+        }
       } else {
-        alert("Please enter Y or N")
+        alert("Please enter a single letter: Y or N")
         numbersCheck = false;
       }
     }
-  }
-
+  };
   // User enters in whether they want special characters included in the password (Y or N)
   while (!specialCheck) {
     var userSpecial = prompt("Would you like to include special characters? (Y or N)");
@@ -105,20 +108,23 @@ function passCodeQuestions() {
       specialCheck = true;
       break;
     } else {
-      if (userSpecial.trim()[0].toUpperCase() === "Y") {
-        passcodeRequirements.includeSpecial = true;
-        console.log(passcodeRequirements)
-        specialCheck = true;
-      } else if (userSpecial.trim()[0].toUpperCase() === "N") {
-        passcodeRequirements.includeSpecial = false;
-        console.log(passcodeRequirements)
-        specialCheck = true;
+      if (userSpecial.length === 1 && (userSpecial.trim()[0].toUpperCase() === "Y" || userSpecial.trim()[0].toUpperCase() === "N")) {
+        if (userSpecial.trim().toUpperCase()[0] === "Y") {
+          passcodeRequirements.includeSpecial = true;
+          console.log(passcodeRequirements)
+          specialCheck = true;
+        } else if (userSpecial.trim()[0].toUpperCase() === "N") {
+          passcodeRequirements.includeSpecial = false;
+          console.log(passcodeRequirements)
+          specialCheck = true;
+        }
       } else {
-        alert("Please enter Y or N")
+        alert("Please enter a single letter: Y or N")
         specialCheck = false;
       }
     }
-  }
+  };
+  // if No has been selected for every catagory
   if (!passcodeRequirements.includeLetters && !passcodeRequirements.includeNumbers && !passcodeRequirements.includeSpecial) {
     alert("You must select at least one category (letters, numbers, or special characters).");
     // Reset checks and call the function again
@@ -126,7 +132,7 @@ function passCodeQuestions() {
     lettersCheck = false;
     numbersCheck = false;
     specialCheck = false;
-    passCodeQuestions();  // Recursively call the function again
+    passCodeQuestions();
   }
 };
 
@@ -135,11 +141,11 @@ passCodeQuestions();
 
 var lowerCaseLetters = [...Array(26)].map((_, i) => String.fromCharCode(i + 97));
 var upperCaseLetters = lowerCaseLetters.map(letter => letter.toUpperCase());
-// var allLettersArray = [lowerCaseLetters, upperCaseLetters];
 var numberArray = [...Array(10)].map((_, i) => i);
 var specialCharacters = [...Array(15)].map((_, i) => String.fromCharCode(i + 33));
 
 
+// Fish Yates shuffle function
 var shuffle = (input) => {
   for (var i = input.length - 1; i > 0; i--); {
     var j = Math.floor(Math.random() * (i + 1));
@@ -148,9 +154,10 @@ var shuffle = (input) => {
   return input;
 }
 
+// Choose a random character from an array
 var randomChoose = (arr) => {
   var h = Math.floor(Math.random() * arr.length);
-  return arr[h]; // Return the element at the randomly chosen index
+  return arr[h];
 };
 
 
@@ -168,6 +175,8 @@ function writePassword() {
   passwordText.value = password;
 }
 
+
+// Generate the password based on user inputs
 function generatePassword() {
   var combinedCharacters = [];
   if (passcodeRequirements.includeLetters) {
