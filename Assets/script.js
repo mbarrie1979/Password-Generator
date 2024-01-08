@@ -124,7 +124,7 @@ var lowerCaseLetters = [...Array(26)].map((_, i) => String.fromCharCode(i + 97))
 var upperCaseLetters = lowerCaseLetters.map(letter => letter.toUpperCase());
 // var allLettersArray = [lowerCaseLetters, upperCaseLetters];
 var numberArray = [...Array(10)].map((_, i) => i);
-var specialCharacters = [...Array(26)].map((_, i) => String.fromCharCode(i + 33));
+var specialCharacters = [...Array(15)].map((_, i) => String.fromCharCode(i + 33));
 
 
 var shuffle = (input) => {
