@@ -9,6 +9,7 @@ var lengthCheck = false;
 var lettersCheck = false;
 var numbersCheck = false;
 var specialCheck = false;
+var questionsAnswered = false;
 
 // object storing user selections
 var passcodeRequirements = {
@@ -136,7 +137,7 @@ function passCodeQuestions() {
   }
 };
 
-passCodeQuestions();
+
 
 
 var lowerCaseLetters = [...Array(26)].map((_, i) => String.fromCharCode(i + 97));
@@ -169,10 +170,15 @@ var randomChoose = (arr) => {
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  if (!questionsAnswered) {
+    passCodeQuestions();
+    questionsAnswered = true;
+  } else {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+    passwordText.value = password;
+  }
 }
 
 
