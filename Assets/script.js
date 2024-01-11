@@ -135,6 +135,10 @@ function passCodeQuestions() {
     specialCheck = false;
     passCodeQuestions();
   }
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
 };
 
 
@@ -164,21 +168,11 @@ var randomChoose = (arr) => {
 
 
 
-
-
-
-
 // Write password to the #password input
 function writePassword() {
-  if (!questionsAnswered) {
-    passCodeQuestions();
-    questionsAnswered = true;
-  } else {
-    var password = generatePassword();
-    var passwordText = document.querySelector("#password");
+  passCodeQuestions();
+  questionsAnswered = true;
 
-    passwordText.value = password;
-  }
 }
 
 
