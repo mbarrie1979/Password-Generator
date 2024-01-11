@@ -6,7 +6,8 @@ var generateBtn = document.querySelector("#generate");
 var regexpCheckIfNumbers = /^\d+$/;
 
 var lengthCheck = false;
-var lettersCheck = false;
+var upperLettersCheck = false;
+var lowerLettersCheck = false;
 var numbersCheck = false;
 var specialCheck = false;
 var questionsAnswered = false;
@@ -14,7 +15,8 @@ var questionsAnswered = false;
 // object storing user selections
 var passcodeRequirements = {
   passwordLength: 8,
-  includeLetters: false,
+  includeLowerCaseLetters: false,
+  includeUpperCaseLetters: false,
   includeNumbers: false,
   includeSpecial: false,
 }
@@ -46,29 +48,55 @@ function passCodeQuestions() {
     }
   };
 
-  // User enters in whether they want letters included in the password (Y or N)
-  while (!lettersCheck) {
-    var userLetters = prompt("Would you like to include letters? (Y or N)");
-    if (!userLetters) {
+  // User enters in whether they want lower case letters included in the password (Y or N)
+  while (!lowerLettersCheck) {
+    var userLowerLetters = prompt("Would you like to include lower case letters? (Y or N)");
+    if (!userLowerLetters) {
       alert("User cancelled, default of YES will be used");
-      passcodeRequirements.includeLetters = true;
+      passcodeRequirements.includeLowerCaseLetters = true;
       console.log(passcodeRequirements)
-      lettersCheck = true;
+      lowerLettersCheck = true;
       break;
     } else {
-      if (userLetters.length === 1 && (userLetters.trim()[0].toUpperCase() === "Y" || userLetters.trim()[0].toUpperCase() === "N")) {
-        if (userLetters.trim()[0].toUpperCase() === "Y") {
-          passcodeRequirements.includeLetters = true;
+      if (userLowerLetters.length === 1 && (userLowerLetters.trim()[0].toUpperCase() === "Y" || userLowerLetters.trim()[0].toUpperCase() === "N")) {
+        if (userLowerLetters.trim()[0].toUpperCase() === "Y") {
+          passcodeRequirements.includeLowerCaseLetters = true;
           console.log(passcodeRequirements)
-          lettersCheck = true;
-        } else if (userLetters.trim()[0].toUpperCase() === "N") {
-          passcodeRequirements.includeLetters = false;
+          lowerLettersCheck = true;
+        } else if (userLowerLetters.trim()[0].toUpperCase() === "N") {
+          passcodeRequirements.includeLowerCaseLetters = false;
           console.log(passcodeRequirements)
-          lettersCheck = true;
+          lowerLettersCheck = true;
         }
       } else {
         alert("Please enter a single letter: Y or N")
-        lettersCheck = false;
+        lowerLettersCheck = false;
+      }
+    }
+  };
+  // User enters in whether they want upper case letters included in the password (Y or N)
+  while (!upperLettersCheck) {
+    var userUpperLetters = prompt("Would you like to include upper case letters? (Y or N)");
+    if (!userUpperLetters) {
+      alert("User cancelled, default of YES will be used");
+      passcodeRequirements.includeUpperCaseLetters = true;
+      console.log(passcodeRequirements)
+      upperLettersCheck = true;
+      break;
+    } else {
+      if (userUpperLetters.length === 1 && (userUpperLetters.trim()[0].toUpperCase() === "Y" || userUpperLetters.trim()[0].toUpperCase() === "N")) {
+        if (userUpperLetters.trim()[0].toUpperCase() === "Y") {
+          passcodeRequirements.includeUpperCaseLetters = true;
+          console.log(passcodeRequirements)
+          upperLettersCheck = true;
+        } else if (userUpperLetters.trim()[0].toUpperCase() === "N") {
+          passcodeRequirements.includeUpperCaseLetters = false;
+          console.log(passcodeRequirements)
+          upperLettersCheck = true;
+        }
+      } else {
+        alert("Please enter a single letter: Y or N")
+        upperLettersCheck = false;
       }
     }
   };
@@ -126,11 +154,12 @@ function passCodeQuestions() {
     }
   };
   // if No has been selected for every catagory
-  if (!passcodeRequirements.includeLetters && !passcodeRequirements.includeNumbers && !passcodeRequirements.includeSpecial) {
+  if (!passcodeRequirements.includeLowerCaseLetters && !passcodeRequirements.includeUpperCaseLetters && !passcodeRequirements.includeNumbers && !passcodeRequirements.includeSpecial) {
     alert("You must select at least one category (letters, numbers, or special characters).");
     // Reset checks and call the function again
     lengthCheck = false;
-    lettersCheck = false;
+    upperLettersCheck = false;
+    lowerLettersCheck = false;
     numbersCheck = false;
     specialCheck = false;
     passCodeQuestions();
@@ -140,7 +169,8 @@ function passCodeQuestions() {
 
     passwordText.value = password;
     lengthCheck = false;
-    lettersCheck = false;
+    upperLettersCheck = false;
+    lowerLettersCheck = false;
     numbersCheck = false;
     specialCheck = false;
   }
@@ -184,8 +214,11 @@ function writePassword() {
 // Generate the password based on user inputs
 function generatePassword() {
   var combinedCharacters = [];
-  if (passcodeRequirements.includeLetters) {
-    combinedCharacters = combinedCharacters.concat(lowerCaseLetters, upperCaseLetters);
+  if (passcodeRequirements.includeLowerCaseLetters) {
+    combinedCharacters = combinedCharacters.concat(lowerCaseLetters);
+  }
+  if (passcodeRequirements.includeUpperCaseLetters) {
+    combinedCharacters = combinedCharacters.concat(upperCaseLetters);
   }
   if (passcodeRequirements.includeNumbers) {
     combinedCharacters = combinedCharacters.concat(numberArray);
