@@ -21,8 +21,8 @@ Experience the Password Generator live: [Password Generator](https://mbarrie1979
 1. **Generate Password**: This will trigger the prompts.
 2. **Set Password Criteria**: Follow the on-screen prompts to select the desired password length and character types (letters, numbers, special characters).
 3. **Validation Checks**: The application ensures at least one character type is selected and validates the user's input.
-4. **Initiate Password Generation**: Click the 'Generate Password' button to display your password.
-5. **Continue to Generate**: Based on your selected criteria you can generate as many passwords as you would like. 
+4. **Copy Your Password**: Once your criteria is selected your password will display.
+
 
 ## Technologies Used
 
