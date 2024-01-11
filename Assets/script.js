@@ -24,7 +24,7 @@ var passcodeRequirements = {
 // User Enters in Desired length of password 8-12 characters
 function passCodeQuestions() {
   while (!lengthCheck) {
-    var userPromptLength = prompt("Enter the desired password length (from 8 - 12 characters)");
+    var userPromptLength = prompt("Enter the desired password length (from 8 - 128 characters)");
 
     if (!userPromptLength) {
       alert("User cancelled, will use default value of 8");
@@ -32,11 +32,11 @@ function passCodeQuestions() {
       console.log(passcodeRequirements)
       break;
     } else if (!userPromptLength.match(regexpCheckIfNumbers)) {
-      alert("You must enter a numeric value from 8 - 12");
+      alert("You must enter a numeric value from 8 - 128");
     } else {
       var parsedLength = parseInt(userPromptLength);
-      if (parsedLength < 8 || parsedLength > 12) {
-        alert("You must enter a value from 8 - 12");
+      if (parsedLength < 8 || parsedLength > 128) {
+        alert("You must enter a value from 8 - 128");
       } else {
         passcodeRequirements.passwordLength = parsedLength;
         console.log(passcodeRequirements)
