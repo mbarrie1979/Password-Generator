@@ -10,7 +10,7 @@ Experience the Password Generator live: [Password Generator](https://mbarrie1979
 
 ## Features
 
-- **Customizable Password Length**: Users can choose a password length between 8 and 12 characters.
+- **Customizable Password Length**: Users can choose a password length between 8 and 128 characters.
 - **Character Type Selection**: Options for including letters (both lower and uppercase), numbers, and special characters.
 - **User Input Validation**: Ensures that inputs are valid and at least one character type is selected. Prompts users to input a single character of 'Y' or 'N' for their choices.
 - **Dynamic Password Generation**: Based on user-selected criteria, a password is generated that matches the specified conditions.
