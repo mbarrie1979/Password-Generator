@@ -134,11 +134,16 @@ function passCodeQuestions() {
     numbersCheck = false;
     specialCheck = false;
     passCodeQuestions();
-  }
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  } else {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+    passwordText.value = password;
+    lengthCheck = false;
+    lettersCheck = false;
+    numbersCheck = false;
+    specialCheck = false;
+  }
 };
 
 
